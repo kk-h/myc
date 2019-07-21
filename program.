@@ -1,0 +1,35 @@
+import cv2
+import numpy as np
+import pylab as plt
+
+def nothing(x):
+    pass
+
+def plot(frame):
+    im1= frame
+    im2 = cv2.cvtColor(im1, cv2.COLOR_BGR2YCR_CB)
+    hist = cv2.calcHist([im2], [0], None, [256], [0, 256]) 
+
+    plt.plot(hist)
+    plt.xlim([0, 256])
+    plt.ylim([0,max(hist)])
+    plt.pause(1)
+
+def main():
+    cap = cv2.VideoCapture(0)
+    size =(1280,960) #(640,480)
+    cv2.namedWindow("video", cv2.WINDOW_NORMAL)
+    while(1):
+        ret, frame = cap.read()
+        frame1 = cv2.resize(frame, dsize=size, interpolation=cv2.INTER_CUBIC)
+        cv2.imshow("video", frame1)
+        plot(frame1)
+        
+        k = cv2.waitKey(30) & 0xff
+        if k == 27:
+            break
+
+    video_input.release()
+    cv2.destroyAllWindows()
+if __name__ == '__main__':
+    main()
