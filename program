@@ -13,6 +13,7 @@ def plot(frame):
     print(average_color)
     x = range(0,3)
     labels = ["Red","Green","Blue"]
+    plt.ylim([0,256])
     plt.bar(x,average_color)
     plt.plot()
     plt.pause(1)
